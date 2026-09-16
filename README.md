@@ -115,11 +115,21 @@ check-bom -Quiet              # 应退出码 0（无编码隐患）
 ```
 embedded-workflow/
 ├── README.md          # 本文件
+├── CONTRIBUTING.md    # 参与贡献指南（一起完善这个流程）
 ├── LICENSE            # MIT
 ├── docs/              # 流程规范文档（公开版）
 ├── skills/            # 75 个 Skill 技能库（SKILL.md + rules）
 └── tools/             # 工具脚本（ps1 + bat + lib）
 ```
+
+## 参与贡献（欢迎共建）
+
+本仓库是**开放共建**的项目：你踩过的坑、补充的技能、改进的脚本，都可能帮到下一个嵌入式开发者。
+
+- 报告 bug / 提出改进 → [Issues](https://github.com/wbw-11/embedded-workflow/issues)
+- 直接动手改 → [Pull Requests](https://github.com/wbw-11/embedded-workflow/pulls)
+- 讨论流程设计 / 经验交流 → 提 Issue 或在 TRAE 社区交流（README 评论区即讨论区）
+- 参与规范 → 见 [CONTRIBUTING.md](CONTRIBUTING.md)（含技能/脚本/文档各自的提交要求）
 
 ## 设计原则
 
