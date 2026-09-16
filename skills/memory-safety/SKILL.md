@@ -1,5 +1,6 @@
 ---
 name: memory-safety
+version: 1.0.0
 description: |
   当用户处理 malloc/free（何时分配、如何安全释放、链表删除的 next 保存）、strcat/strcpy 缓冲区溢出防护、或 malloc 失败处理时调用。 核心: 每个 malloc/calloc/返回指针只能 free 一次且不得再用；free 链表项前先保存 next；strcat/strcpy 由调用方保证目标足够大（本书原话 "s must be big enough"）。 步骤: 画清指针所有权→释放前保存必要字段→缓冲区长度显式传递并检查→malloc 失败返回 NULL 要处理。 不适用于: 栈上数组/静态缓冲区的非法最大长度假设、开启 ASLR/栈保护后的编译器行为细节；自建分配器/内存池的实现细节（→ 路由入口 allocator-pattern）。 Triggers: malloc/free/内存泄漏/悬挂指针/缓冲区溢出/strcat/链表释放/double free/内存安全
 metadata:

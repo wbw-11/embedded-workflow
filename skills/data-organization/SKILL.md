@@ -1,5 +1,6 @@
 ---
 name: data-organization
+version: 1.0.0
 description: |
   当用户设计 C 数据结构（struct vs union vs typedef vs 位字段选型）、疑惑结构大小与对齐空穴、要按位封装硬件标志、或以 union 做寄存器/协议字段视图时调用。 核心: struct 组织异质字段单元并可整体赋值/传参/返回；联合成员偏移全 0 共享存储取最大者；typedef 只是别名非新类型；位字段在成员层声明 成员:位数。 步骤: 按"同存异存"选 struct/union→用 sizeof 求真长→位密集用位字段→对外固定布局用偏移工具。 不适用于: 需要严格二进制内存布局可移植性保证（跨编译器时位字段/union 布局是实现定义的）；链表/树的遍历插入删除实现套路（→ 路由入口 linked-list 能力）；算法实现本身（→ c-algorithms）。 Triggers: 结构体/联合体/typedef/位字段/对齐/空穴/寄存器/协议字段/struct/union/bitfield
 metadata:

@@ -1,5 +1,6 @@
 ---
 name: header-organization
+version: 1.0.0
 description: |
   当用户组织多文件 C 工程（共享变量/函数怎么声明和定义、extern/头文件用法、static 文件级隐藏、避免重复定义）时调用。 核心: ANSI 规定每个外部对象只能有一个定义；头文件放声明(#include 共享)、源文件放定义；static 可把外部对象限定在源文件内；避免变量隐藏外部同名变量。 步骤: 划共享接口进头文件→各源文件 include→定义唯一落在一个源文件→private 对象加 static→检查重复定义/隐式声明。 不适用于: C++ 的命名空间/内联变量规则、Windows DLL 导出语法；单个函数的原型句法/隐式声明的类型一致性（→ 路由入口 function-prototype 能力）；大任务的函数拆分策略（→ 路由入口 function-decomposition）。 Triggers: extern/头文件/外部变量/单一定义/static/作用域/多文件/重复定义/头文件组织
 metadata:

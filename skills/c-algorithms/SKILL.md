@@ -1,5 +1,6 @@
 ---
 name: c-algorithms
+version: 1.0.0
 description: |
   当用户要在 C 语言中实现/迁移经典算法（折半查找、排序、关键词表查找）、想知道表长安全求法（sizeof 编译期）、指针版折半边界规则、或以函数指针注入比较逻辑时调用。 核心: sizeof tab/sizeof tab[0] 编译期求元素个数；指针版 mid=low+(high-low)/2（指针不能相加）；qsort 用函数指针参数解耦比较逻辑。 步骤: 定数据结构→算表长→选查找/排序策略→(需要不同排序标准时)抽比较函数为参数。 不适用于: C++ STL/Rust 泛型容器、需要稳定排序但未显式处理时；递归vs迭代的取舍选型（经路由入口由 recursion 能力处理）；链表/树等数据结构的实现套路与 struct vs union 选型（→ data-organization 或路由 linked-list）；静态关键字表的 struct 组织方式（→ data-organization）。 Triggers: 折半查找/二分/排序/shellsort/qsort/sizeof 算表长/函数指针/回调/算法 C 语言
 metadata:
