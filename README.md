@@ -8,11 +8,13 @@
 ![Repo Size](https://img.shields.io/github/repo-size/wbw-11/embedded-workflow)
 ![Languages](https://img.shields.io/github/languages/count/wbw-11/embedded-workflow)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Keil%20%7C%20ESP--IDF-blue)
+![TRAE SOLO](https://img.shields.io/badge/Built%20for-TRAE%20SOLO-4f46e5)
 
 </div>
 
 > 一套将「个人嵌入式开发经验」工程化的工作流：**Skill 技能库 + 工具脚本 + 流程规范**。
 > 目标：新人/新项目/换机器也能快速复制整套开发方法论 —— 四步准备 → 驱动开发 → 编译烧录 → 审查测试 → 调试验证 → 经验沉淀闭环。
+> 第一适配平台：**TRAE SOLO**（Windows 个人版）—— `skills/` 复制到 `.trae-cn/skills/` 即可被自动发现，`memory` 机制联动 `knowledge-index`。
 
 ## 这是什么
 
@@ -61,13 +63,26 @@
 
 ### 方式二：配合 AI 编程助手使用（本仓库的设计目标）
 
-本技能库为 AI 助手（如 Trae / TraeCode）设计：把 `skills/` 下的目录复制到助手的技能目录，或在提示词中引用对应 `SKILL.md`，助手即可按规则执行：
+本技能库为 **TRAE SOLO（Windows 个人版）** 设计（也兼容 Trae / TraeCode 等支持 `SKILL.md` 的助手）：
+
+```powershell
+# 1. 复制技能库到 TRAE SOLO 技能目录（自动发现）
+Copy-Item -Path .\skills\* -Destination "$env:USERPROFILE\.trae-cn\skills\" -Recurse
+
+# 2. 配置 memory 扫描根（knowledge-index 联动）
+#    tools\knowledge-index.ps1 默认扫描 $env:USERPROFILE\.trae-cn\memory\projects
+
+# 3. 验证技能被识别
+tools\check-skills.ps1          # 应输出：技能 count > 0，退出码 0
+```
+
+助手即可按规则执行：
 
 1. 需求 → `requirement-extraction` 整理为 REQ 编号 + P0-P2 分级
 2. 四步准备 → 需求分析 / 硬件评估 / 软件架构 / 工具链，用户确认后才写码
 3. 开发 → 驱动走模板，寄存器/库函数查 datasheet（禁止凭记忆）
 4. 编译烧录 → 先编译→核对时间戳→再烧录，版本号三处一致
-5. 沉淀 → 验证通过的经验回写规范，下次自动执行
+5. 沉淀 → 验证通过的经验回写 `.trae-cn\memory\`，下次自动触发
 
 ### 方式三：部署工具脚本（约 5 分钟）
 
