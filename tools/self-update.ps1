@@ -50,7 +50,7 @@ param(
 )
 
 # ==================== 常量 ====================
-$SCRIPT:TOOLS_DIR = "$env:USERPROFILE\Tools"
+$SCRIPT:TOOLS_DIR = $PSScriptRoot
 $SCRIPT:SKILLS_SCAN_DIRS = @(
 	"$env:USERPROFILE\.trae-cn\skills"
 )
