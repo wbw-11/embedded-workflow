@@ -31,7 +31,7 @@ param(
 )
 
 # ==================== 常量 ====================
-$SCRIPT:TOOLS = if ($SelfTest) { Join-Path $env:TEMP 'version-tools_selftest' } else { '$env:USERPROFILE\Tools' }
+$SCRIPT:TOOLS = if ($SelfTest) { Join-Path $env:TEMP 'version-tools_selftest' } else { "$env:USERPROFILE\Tools" }
 $SCRIPT:VERSION_FILE = Join-Path $SCRIPT:TOOLS 'tools_version.json'
 $SCRIPT:CHANGELOG = Join-Path $SCRIPT:TOOLS 'changelog.md'
 

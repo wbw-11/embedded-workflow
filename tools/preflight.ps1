@@ -258,8 +258,8 @@ if ($FixAuto -and $verdict.MissingPack) {
 Write-Host ''
 Write-Hr '个人流程规范（开工对照执行）'
 $normCands = @(
-    (Join-Path $env:USERPROFILE 'Desktop\<项目根目录>\个人嵌入式开发流程规范.md'),
-    (Join-Path $env:USERPROFILE 'Desktop\个人嵌入式开发流程规范.md')
+    (Join-Path $env:USERPROFILE 'Desktop\个人嵌入式开发流程规范.md'),
+    (Join-Path $PSScriptRoot '..\docs\嵌入式开发工作流速查手册.md')
 )
 $normDoc = $normCands | Where-Object { Test-Path $_ } | Select-Object -First 1
 if ($normDoc) {

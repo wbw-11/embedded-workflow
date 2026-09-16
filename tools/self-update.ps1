@@ -50,18 +50,18 @@ param(
 )
 
 # ==================== 常量 ====================
-$SCRIPT:TOOLS_DIR = '$env:USERPROFILE\Tools'
+$SCRIPT:TOOLS_DIR = "$env:USERPROFILE\Tools"
 $SCRIPT:SKILLS_SCAN_DIRS = @(
-	'$env:USERPROFILE\.trae-cn\skills'
+	"$env:USERPROFILE\.trae-cn\skills"
 )
-$SCRIPT:MEMORY_DIR = '$env:USERPROFILE\.trae-cn\memory'
+$SCRIPT:MEMORY_DIR = "$env:USERPROFILE\.trae-cn\memory"
 $SCRIPT:STATE_FILE = Join-Path $SCRIPT:TOOLS_DIR '.self-update-state.json'
 $SCRIPT:ARCHIVE_DIR = Join-Path $SCRIPT:MEMORY_DIR '.cleanup'
 $SCRIPT:USER_PROFILE = Join-Path $SCRIPT:MEMORY_DIR 'user_profile.md'
 $SCRIPT:SKILL_MIN_SIZE = 200
 $SCRIPT:SKILL_MAX_SIZE = 50000
 $SCRIPT:SESSION_RETAIN_DAYS = 30
-$SCRIPT:DEFAULT_PROJECT_ROOT = '<PROJECT_ROOT>'
+$SCRIPT:DEFAULT_PROJECT_ROOT = ''  # 发布版默认空：请用 -ProjectRoot 显式指定项目根目录
 $SCRIPT:PROJECT_MAX_DEPTH = 5
 $SCRIPT:TRIGGER_INTERVALS = @{
 	session = @{ Hours = 24 }

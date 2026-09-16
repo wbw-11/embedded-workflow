@@ -457,7 +457,10 @@ Invoke-StoragePreflight -Root $ProjectDir
 
 # 个人流程规范引用（-SkipReview 隐藏；仅提示不阻断主流程）
 if (-not $SkipReview) {
-    $normDoc = Join-Path $env:USERPROFILE 'Desktop\<项目根目录>\个人嵌入式开发流程规范.md'
+    $normDoc = Join-Path $env:USERPROFILE 'Desktop\个人嵌入式开发流程规范.md'
+    if (-not (Test-Path $normDoc)) {
+        $normDoc = Join-Path $PSScriptRoot '..\docs\嵌入式开发工作流速查手册.md'
+    }
     if (Test-Path $normDoc) {
         Write-Host "  流程规范: $normDoc（四步准备/红线/门禁/验证/归档/沉淀）" -ForegroundColor DarkGray
     }
