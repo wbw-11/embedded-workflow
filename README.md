@@ -1,5 +1,16 @@
 # Embedded Development Workflow（嵌入式开发工作流）
 
+
+<div align="center">
+
+![License](https://img.shields.io/badge/License-MIT-green)
+![Stars](https://img.shields.io/github/stars/wbw-11/embedded-workflow?style=flat)
+![Repo Size](https://img.shields.io/github/repo-size/wbw-11/embedded-workflow)
+![Languages](https://img.shields.io/github/languages/count/wbw-11/embedded-workflow)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Keil%20%7C%20ESP--IDF-blue)
+
+</div>
+
 > 一套将「个人嵌入式开发经验」工程化的工作流：**Skill 技能库 + 工具脚本 + 流程规范**。
 > 目标：新人/新项目/换机器也能快速复制整套开发方法论 —— 四步准备 → 驱动开发 → 编译烧录 → 审查测试 → 调试验证 → 经验沉淀闭环。
 
