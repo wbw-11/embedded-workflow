@@ -12,6 +12,10 @@
 
 </div>
 
+<div align="center">
+  <img src="docs/workflow-overview.svg" alt="嵌入式开发工作流三层闭环体系" width="860">
+</div>
+
 > 一套将「个人嵌入式开发经验」工程化的工作流：**Skill 技能库 + 工具脚本 + 流程规范**。
 > 目标：新人/新项目/换机器也能快速复制整套开发方法论 —— 四步准备 → 驱动开发 → 编译烧录 → 审查测试 → 调试验证 → 经验沉淀闭环。
 > 第一适配平台：**TRAE SOLO**（Windows 个人版）—— `skills/` 复制到 `.trae-cn/skills/` 即可被自动发现，`memory` 机制联动 `knowledge-index`。

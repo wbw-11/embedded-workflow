@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="gSkill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="gTools" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="gMem" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="960" height="420" rx="16" fill="url(#bg)"/>
+
+  <!-- 标题 -->
+  <text x="480" y="42" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="bold">嵌入式开发工作流 · 三层闭环体系</text>
+  <text x="480" y="64" text-anchor="middle" fill="#94a3b8" font-size="13">四步准备 → 开发 → 编译烧录 → 审查测试 → 调试验证 → 经验沉淀</text>
+
+  <!-- ============ 左侧：四步准备流程（纵向） ============ -->
+  <g transform="translate(30,95)">
+    <text x="0" y="0" fill="#fbbf24" font-size="13" font-weight="bold">① 四步准备（写码前）</text>
+    <rect x="0" y="12" width="205" height="34" rx="8" fill="#334155" opacity="0.9"/>
+    <text x="10" y="34" fill="#e2e8f0" font-size="12">1. 需求分析 → REQ 编号 + P0-P2</text>
+    <rect x="0" y="52" width="205" height="34" rx="8" fill="#334155" opacity="0.9"/>
+    <text x="10" y="74" fill="#e2e8f0" font-size="12">2. 硬件评估 → 引脚 + 时钟验证</text>
+    <rect x="0" y="92" width="205" height="34" rx="8" fill="#334155" opacity="0.9"/>
+    <text x="10" y="114" fill="#e2e8f0" font-size="12">3. 软件架构 → V0→Vn 梯度</text>
+    <rect x="0" y="132" width="205" height="34" rx="8" fill="#334155" opacity="0.9"/>
+    <text x="10" y="154" fill="#e2e8f0" font-size="12">4. 工具链 → git + 审查钩子</text>
+    <!-- 箭头指向右侧 -->
+    <path d="M 205 150 H 248" stroke="#fbbf24" stroke-width="2" fill="none" marker-end="url(#arrowY)"/>
+  </g>
+
+  <!-- 右侧三层 -->
+  <g transform="translate(262,85)">
+    <!-- 层1：Skills -->
+    <rect x="0" y="0" width="420" height="58" rx="10" fill="url(#gSkill)" opacity="0.95"/>
+    <text x="18" y="24" fill="#fff" font-size="14" font-weight="bold">Skills 技能库（77 个）</text>
+    <text x="18" y="44" fill="#e0e7ff" font-size="11.5">流程规则 · 驱动模板 · 芯片规则 · 审查测试 · 调试诊断 · 量产</text>
+
+    <!-- 层2：Tools -->
+    <rect x="0" y="70" width="420" height="58" rx="10" fill="url(#gTools)" opacity="0.95"/>
+    <text x="18" y="94" fill="#fff" font-size="14" font-weight="bold">Tools 工具脚本（60+）</text>
+    <text x="18" y="114" fill="#e0f2fe" font-size="11.5">dev-flow · detect-chip · safe-flash · code-style-check · pin-check</text>
+
+    <!-- 层3：Memory -->
+    <rect x="0" y="140" width="420" height="58" rx="10" fill="url(#gMem)" opacity="0.95"/>
+    <text x="18" y="164" fill="#fff" font-size="14" font-weight="bold">Memory 记忆体系</text>
+    <text x="18" y="184" fill="#d1fae5" font-size="11.5">通用规则 L1 · 芯片系列 L2 · 项目级 L3 · 经验自动沉淀</text>
+
+    <!-- 三层右侧闭环箭头 -->
+    <path d="M 428 29 H 448 V 169 H 428" stroke="#38bdf8" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrowB)"/>
+    <path d="M 428 169 H 448 V 29 H 428" stroke="#34d399" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrowB)"/>
+    <text x="457" y="95" fill="#94a3b8" font-size="11" transform="rotate(90 462 100)">自动触发 · 闭环</text>
+  </g>
+
+  <!-- ============ 底部：关键产出 ============ -->
+  <g transform="translate(30,290)">
+    <text x="0" y="0" fill="#fbbf24" font-size="13" font-weight="bold">② 贯穿全流程的关键产物</text>
+    <rect x="0" y="12" width="652" height="30" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="12" y="32" fill="#cbd5e1" font-size="12">需求表 · 四步准备文档 · 引脚册 · 缺陷台账 · 版本号三处一致 · 固件归档（Firmware_Build/）</text>
+  </g>
+
+  <!-- 底部核心承诺 -->
+  <g transform="translate(30,360)">
+    <rect x="0" y="0" width="652" height="40" rx="8" fill="#f8fafc" opacity="0.08"/>
+    <text x="18" y="18" fill="#e2e8f0" font-size="12.5" font-weight="bold">核心承诺</text>
+    <text x="18" y="36" fill="#94a3b8" font-size="11.5">零硬编码动态检测 · 禁止凭记忆写寄存器 · 烧录前时间戳门禁 · 同一个坑不踩第二次</text>
+  </g>
+
+  <defs>
+    <marker id="arrowY" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrowB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+</svg>
