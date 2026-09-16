@@ -1,5 +1,9 @@
 # Tools Changelog
 
+## 2026-09-16	v1.0.1	发布（统一缩进规则 + README 部署指南）
+- code-style-check.ps1 1.0.0 -> 1.0.1	patch	缩进规则反转为空格风格（禁用 Tab），与项目代码风格声明一致；三步法回归 3/3 PASS
+- README 部署指南重写：真实 clone 地址、首次验证 3 命令、依赖说明
+
 ## 2026-09-02	版本发布工程初始化
 - 新增 version-tools.ps1（版本登记/变更记录/缺失检测，单一真实源=脚本内嵌 version 行）
 - 全量 35 个脚本统一登记 version: 1.0.0，生成 tools_version.json 聚合索引

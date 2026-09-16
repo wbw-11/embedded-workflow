@@ -2,7 +2,7 @@
 .SYNOPSIS
     嵌入式 C 代码规范检查工具（含数据溢出检测）
 .DESCRIPTION
-    根据用户自定义代码规范，检查 .c/.h 文件的命名、缩进、大括号、头文件保护、const、static 等问题，
+    根据用户自定义代码规范，检查 .c/.h 文件的命名、缩进（空格风格，禁用 Tab）、大括号、头文件保护、const、static 等问题，
     并额外检测 7 类数据溢出隐患（sprintf/strcpy/gets/memcpy 裸长度/移位溢出等）。
     生成规范化报告，供编码后自查。
 .USAGE
@@ -11,7 +11,7 @@
     code-style-check -Path main.c -All -Json report.json
     code-style-check -Path main.c -Checks overflow   # 只跑溢出检测
     code-style-check -Path src -Checks overflow,defensive -ChangedOnly  # 增量：只扫 git diff 改动文件
-  version: 1.0.0
+  version: 1.0.1
 #>
 
 param(
@@ -206,7 +206,7 @@ function Remove-Comments-Strings {
 # 检查项实现
 # ============================================================
 $categories = @{
-    Indent    = @{ Name = '缩进与Tab空格'; Issues = @() }
+    Indent    = @{ Name = '缩进（空格风格，禁用 Tab）'; Issues = @() }
     LineWidth = @{ Name = '行宽限制';       Issues = @() }
     Brace     = @{ Name = '大括号不省略';   Issues = @() }
     Naming    = @{ Name = '命名规范';       Issues = @() }
@@ -304,9 +304,9 @@ foreach ($file in $filesToCheck) {
                 if ($hasTab -and $hasSpace) {
                     $categories.Indent.Issues += "$($file.Name):$lineNo Tab mixed with space"
                     $fileReport.Issues += [ordered]@{ Category="Indent"; Line=$lineNo; Message="Tab mixed with space" }
-                } elseif ($hasSpace -and -not $hasTab) {
-                    $categories.Indent.Issues += "$($file.Name):$lineNo uses spaces (should use Tab)"
-                    $fileReport.Issues += [ordered]@{ Category="Indent"; Line=$lineNo; Message="Uses spaces (should use Tab)" }
+                } elseif ($hasTab -and -not $hasSpace) {
+                    $categories.Indent.Issues += "$($file.Name):$lineNo uses Tab (should use spaces)"
+                    $fileReport.Issues += [ordered]@{ Category="Indent"; Line=$lineNo; Message="Uses Tab (should use spaces)" }
                 }
             }
         }

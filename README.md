@@ -69,14 +69,27 @@
 4. 编译烧录 → 先编译→核对时间戳→再烧录，版本号三处一致
 5. 沉淀 → 验证通过的经验回写规范，下次自动执行
 
-### 方式三：部署工具脚本
+### 方式三：部署工具脚本（约 5 分钟）
 
 ```powershell
 # 1. clone 本仓库
-git clone https://github.com/your-github-username/embedded-workflow.git
-# 2. 把 tools/ 加入用户 PATH（含 lib/ 公共库）
-# 3. 依赖：Git / PowerShell 5.1+；Keil / ESP-IDF / STC 工具链自行安装（脚本动态检测路径）
+git clone https://github.com/wbw-11/embedded-workflow.git
+
+# 2. 将 tools/ 加入用户 PATH（脚本名即命令名；含 lib/ 公共库，必须同目录）
+#    Windows: 设置 → 系统 → 高级系统设置 → 环境变量 → 用户变量 PATH 追加 tools 目录
+
+# 3. 首次运行验证（约 1 分钟）
+tool-guide                    # 应列出全部工具及版本号
+version-tools -Validate       # 应输出 [OK] 全部脚本已带 version
+check-bom -Quiet              # 应退出码 0（无编码隐患）
 ```
+
+**依赖说明**
+- 基础：Windows + PowerShell 5.1+ + Git
+- 工具链（脚本自动动态检测，缺哪个只影响对应功能）：Keil（ARM/51）、ESP-IDF v5.5、STC 烧录工具——均需自行安装
+- 运行 `tool-guide` 确认基础可用后，`preflight -ProjectDir <工程路径>` 可一键核查本机工具链是否覆盖你的工程
+
+> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `tool-guide / version-tools / check-bom / code-style-check / pin-check` 全部可运行。
 
 ## 目录结构
 
@@ -95,6 +108,16 @@ embedded-workflow/
 - **验证优先**：禁止凭记忆写寄存器/库函数；烧录前必查时间戳防烧旧版；每级验证后脱机复核
 - **人机分工**：你负责决策与硬件操作，助手负责检测/写码/编译/审查/烧录执行
 - **经验闭环**：踩坑→提炼→分级落盘（通用规则/芯片系列/项目级）→自动触发
+
+## 代码风格（code-style-check 强制执行）
+
+- **缩进**：空格（禁用 Tab；Tab 与空格混用、纯 Tab 都会报错）
+- 单行 ≤120 字符；`if/else/for/while` 单行也带 `{}`
+- 命名：下划线风格（全局 `g_` / 静态 `s_` / 指针 `p_`）；宏全大写
+- 位运算用无符号（`1U`）；const/static 最大化；无魔法数（宏/枚举代替）
+- 结构体协议定义后必须加 `_Static_assert(sizeof(...))` 检查
+
+> 规则由 `tools/code-style-check.ps1` 自动检查，含 5 类静态检查 + 数据溢出/防御性编程检测（P0/P1 分级）。
 
 ## License
 
