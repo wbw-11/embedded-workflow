@@ -9,9 +9,12 @@ clone 本仓库后在根目录运行，自动完成：
 说明：
   - 脚本自定位（$PSScriptRoot），任意路径 clone 均可运行，零硬编码
   - 重复执行安全（幂等）：skills 已有同名目录则跳过，PATH 已有则不重复加
+  - 部署结果写入清单 ~\.trae-cn\embedded-workflow\install.json，供 uninstall.ps1 精准卸载
 .EXAMPLE
 powershell -ExecutionPolicy Bypass -File .\install.ps1
-  version: 1.0.0
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -NoPath   # 不动 PATH
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -Force    # 同名技能也覆盖
+  version: 1.1.0
 #>
 [CmdletBinding()]
 param(
@@ -25,6 +28,8 @@ $skills_src = Join-Path $repo_root 'skills'
 $tools_src  = Join-Path $repo_root 'tools'
 $trae_home  = Join-Path $env:USERPROFILE '.trae-cn'
 $skills_dst = Join-Path $trae_home 'skills'
+$record_dir = Join-Path $trae_home 'embedded-workflow'
+$record_file = Join-Path $record_dir 'install.json'
 
 function Write-Step($msg)  { Write-Host "`n==> $msg" -ForegroundColor Cyan }
 function Write-OK($msg)    { Write-Host "    [OK] $msg" -ForegroundColor Green }
@@ -39,31 +44,33 @@ if ($ps_major -lt 5) { throw "需要 PowerShell 5.1+，当前 $($PSVersionTable.
 Write-OK "PowerShell $($PSVersionTable.PSVersion)"
 Write-OK "仓库: $repo_root"
 
-# ---------- 1. 部署 skills ----------
+# ---------- 1. 部署 skills（记录清单供卸载） ----------
 Write-Step "部署 skills → $skills_dst"
 if (-not (Test-Path $skills_dst)) { New-Item -ItemType Directory -Path $skills_dst -Force | Out-Null }
 
-$deployed = 0; $skipped = 0
+$deployed = @(); $overwritten = @(); $skipped = @()
 Get-ChildItem -Path $skills_src -Directory | ForEach-Object {
     $dst_skill = Join-Path $skills_dst $_.Name
     if (Test-Path $dst_skill) {
         if ($Force) {
             Remove-Item $dst_skill -Recurse -Force
             Copy-Item $_.FullName $dst_skill -Recurse -Force
-            $deployed++
+            $overwritten += $_.Name
         } else {
-            $skipped++
+            $skipped += $_.Name
         }
     } else {
         Copy-Item $_.FullName $dst_skill -Recurse -Force
-        $deployed++
+        $deployed += $_.Name
     }
 }
 $skill_count = (Get-ChildItem $skills_dst -Directory).Count
-Write-OK "已部署 $deployed 个技能，跳过 $skipped 个（同名，用 -Force 覆盖），当前技能目录共 $skill_count 个"
+Write-OK "新装 $($deployed.Count) 个，覆盖 $($overwritten.Count) 个，跳过 $($skipped.Count) 个（同名，用 -Force 覆盖）"
+Write-OK "当前技能目录共 $skill_count 个"
 Write-Warn '提示：若 TRAE 正在运行，重启后技能才会被自动发现'
 
 # ---------- 2. 加入用户 PATH ----------
+$path_added = $false
 if ($NoPath) {
     Write-Warn '已跳过 PATH 修改（-NoPath），工具请手动使用 tools\ 全路径调用'
 } else {
@@ -73,6 +80,7 @@ if ($NoPath) {
         Write-OK "PATH 已包含 $tools_src"
     } else {
         [Environment]::SetEnvironmentVariable('Path', "$user_path;$tools_src", 'User')
+        $path_added = $true
         Write-OK "已追加（当前终端需重启后才生效）: $tools_src"
     }
 }
@@ -97,7 +105,20 @@ foreach ($cmd in $verify_cmds) {
     }
 }
 
-# ---------- 4. 总结 ----------
+# ---------- 4. 写部署清单（供 uninstall.ps1 精准卸载） ----------
+if (-not (Test-Path $record_dir)) { New-Item -ItemType Directory -Path $record_dir -Force | Out-Null }
+$record = [ordered]@{
+    installed_at   = Get-Date -Format 'yyyy-MM-dd HH:mm'
+    repo_root      = $repo_root
+    tools_path     = $tools_src
+    path_added     = $path_added
+    skills_deployed    = $deployed
+    skills_overwritten = $overwritten
+}
+$record | ConvertTo-Json -Depth 3 | Set-Content -Path $record_file -Encoding UTF8
+Write-OK "部署清单已写入 $record_file"
+
+# ---------- 5. 总结 ----------
 Write-Host "`n========== 部署完成 ==========" -ForegroundColor Cyan
 Write-Host "  skills : $skill_count 个 → $skills_dst"
 Write-Host "  tools  : $tools_src" -NoNewline
@@ -105,6 +126,8 @@ if ($NoPath) { Write-Host "（未加 PATH）" } else { Write-Host "（已加 PAT
 Write-Host "  验证   : " -NoNewline
 if ($fail -eq 0) { Write-Host "3/3 PASS，部署成功" -ForegroundColor Green }
 else             { Write-Host "$fail/3 未通过，见上方提示" -ForegroundColor Yellow }
+Write-Host "  卸载   : 运行 uninstall.ps1 可精准卸载（只删本脚本部署的内容）"
+Write-Host "  便携   : 不想装全局？用 run.ps1 <工具名> 直接跑，零残留"
 Write-Host "  下一步 : 打开 TRAE（重启），对 AI 说「帮我开新项目」，即走四步准备流程"
 Write-Host "============================" -ForegroundColor Cyan
 

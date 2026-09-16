@@ -108,7 +108,29 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 2. **tools 加入用户 PATH** → 脚本名即命令名（含 `lib/` 公共库，必须同目录；`-NoPath` 跳过）
 3. **首次验证 3 连** → `tool-guide` / `version-tools -Validate` / `check-bom -Quiet` 全部 PASS 才算部署成功
 
-> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `install.ps1` 与 `tool-guide / version-tools / check-bom / code-style-check / pin-check` 全部可运行。
+**一键卸载（不留残留，不碰你原有技能）**
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
+```
+
+卸载原理：install 时写入部署清单（`~\.trae-cn\embedded-workflow\install.json`），uninstall 只删除清单中记录的本仓库技能 + 移除 PATH + 清理清单，**用户原有的同名技能不受影响**。
+
+### 方式四：便携模式（不安装，零残留，单文件夹即用）
+
+不想装全局？本仓库文件夹本身就是便携工具包，一条命令直接跑：
+
+```powershell
+.\run.ps1 tool-guide                # 查看全部可用工具
+.\run.ps1 detect-chip               # 跑任意工具，参数原样透传
+.\run.ps1 dev-flow -ProjectDir D:\proj
+```
+
+- **零安装**：不加 PATH、不复制文件，tools 仅在当前进程临时生效
+- **零残留**：删掉本文件夹 = 完全卸载
+- 唯一代价：skills 不装进 TRAE 技能目录（需要 TRAE 技能联动时用方式三）
+
+> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `install.ps1 → uninstall.ps1 → run.ps1` 三流程闭环 + `tool-guide / version-tools / check-bom / code-style-check / pin-check` 全部可运行。
 
 **依赖说明**
 - 基础：Windows + PowerShell 5.1+ + Git
@@ -119,6 +141,9 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 
 ```
 embedded-workflow/
+├── install.ps1       # 一键部署（skills + PATH + 验证）
+├── uninstall.ps1     # 一键卸载（精准删除，不碰原有技能）
+├── run.ps1           # 便携运行（不安装，零残留）
 ├── README.md          # 本文件
 ├── CONTRIBUTING.md    # 参与贡献指南（一起完善这个流程）
 ├── LICENSE            # MIT
