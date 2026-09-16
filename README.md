@@ -28,13 +28,13 @@
 
 | 组成部分 | 内容 | 位置 |
 | --- | --- | --- |
-| **Skills 技能库** | 75 个可执行技能（SKILL.md），覆盖开发全流程：流程规则 / 驱动模板 / 芯片规则 / 审查 / 测试 / 调试 / 量产 | [`skills/`](skills/) |
+| **Skills 技能库** | 77 个可执行技能（SKILL.md），覆盖开发全流程：流程规则 / 驱动模板 / 芯片规则 / 审查 / 测试 / 调试 / 量产 | [`skills/`](skills/) |
 | **工具脚本** | 60+ PowerShell + Python 脚本，自动编译烧录、引脚检查、芯片检测、静态审查、版本登记 | [`tools/`](tools/) |
 | **流程规范** | 开发工作流速查手册：按「工作流阶段 × 人机分工」组织，配合技能使用 | [`docs/`](docs/) |
 
 ## 快速浏览（目录）
 
-### Skills（75 个，按阶段分组）
+### Skills（77 个，按阶段分组）
 
 - **流程与规则**：embedded-dev-rules（红线+工作流）、chip-rules（芯片系列规则）、requirement-extraction（需求整理）、writing-plans（计划编写）、software-design-doc（软件设计文档）、code-migration（代码移植）
 - **开发与驱动**：peripheral-driver-template（UART/SPI/I2C/ADC）、ble-nus-template（BLE 透传）、wifi-app-template（WiFi/MQTT）、zephyr-lvgl-guide（Zephyr+LVGL）、freertos-*（FreeRTOS 基础/驱动集成/多核）
@@ -90,7 +90,7 @@ tools\check-skills.ps1          # 应输出：技能 count > 0，退出码 0
 4. 编译烧录 → 先编译→核对时间戳→再烧录，版本号三处一致
 5. 沉淀 → 验证通过的经验回写 `.trae-cn\memory\`，下次自动触发
 
-### 方式三：部署工具脚本（约 5 分钟）
+### 方式三：一键部署（clone 后 1 条命令）
 
 ```powershell
 # 1. clone 本仓库（任选一个源）
@@ -98,21 +98,22 @@ git clone https://github.com/wbw-11/embedded-workflow.git      # GitHub（主源
 # 国内加速镜像：
 git clone https://gitee.com/wbow/embedded-workflow.git         # Gitee
 
-# 2. 将 tools/ 加入用户 PATH（脚本名即命令名；含 lib/ 公共库，必须同目录）
-#    Windows: 设置 → 系统 → 高级系统设置 → 环境变量 → 用户变量 PATH 追加 tools 目录
-
-# 3. 首次运行验证（约 1 分钟）
-tool-guide                    # 应列出全部工具及版本号
-version-tools -Validate       # 应输出 [OK] 全部脚本已带 version
-check-bom -Quiet              # 应退出码 0（无编码隐患）
+# 2. 一键部署（自动装 skills 到 TRAE 技能目录 + tools 加入 PATH + 首次验证）
+cd embedded-workflow
+powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
+
+脚本会自动完成：
+1. **部署 skills** → `$env:USERPROFILE\.trae-cn\skills\`（TRAE 自动发现；同名技能默认跳过，`-Force` 覆盖）
+2. **tools 加入用户 PATH** → 脚本名即命令名（含 `lib/` 公共库，必须同目录；`-NoPath` 跳过）
+3. **首次验证 3 连** → `tool-guide` / `version-tools -Validate` / `check-bom -Quiet` 全部 PASS 才算部署成功
+
+> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `install.ps1` 与 `tool-guide / version-tools / check-bom / code-style-check / pin-check` 全部可运行。
 
 **依赖说明**
 - 基础：Windows + PowerShell 5.1+ + Git
 - 工具链（脚本自动动态检测，缺哪个只影响对应功能）：Keil（ARM/51）、ESP-IDF v5.5、STC 烧录工具——均需自行安装
-- 运行 `tool-guide` 确认基础可用后，`preflight -ProjectDir <工程路径>` 可一键核查本机工具链是否覆盖你的工程
-
-> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `tool-guide / version-tools / check-bom / code-style-check / pin-check` 全部可运行。
+- 运行 `install.ps1` 部署后，`preflight -ProjectDir <工程路径>` 可一键核查本机工具链是否覆盖你的工程
 
 ## 目录结构
 
@@ -122,7 +123,7 @@ embedded-workflow/
 ├── CONTRIBUTING.md    # 参与贡献指南（一起完善这个流程）
 ├── LICENSE            # MIT
 ├── docs/              # 流程规范文档（公开版）
-├── skills/            # 75 个 Skill 技能库（SKILL.md + rules）
+├── skills/            # 77 个 Skill 技能库（SKILL.md + rules）
 └── tools/             # 工具脚本（ps1 + bat + lib）
 ```
 
