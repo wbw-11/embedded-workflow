@@ -93,8 +93,10 @@ tools\check-skills.ps1          # 应输出：技能 count > 0，退出码 0
 ### 方式三：部署工具脚本（约 5 分钟）
 
 ```powershell
-# 1. clone 本仓库
-git clone https://github.com/wbw-11/embedded-workflow.git
+# 1. clone 本仓库（任选一个源）
+git clone https://github.com/wbw-11/embedded-workflow.git      # GitHub（主源）
+# 国内加速镜像：
+git clone https://gitee.com/wbow/embedded-workflow.git         # Gitee
 
 # 2. 将 tools/ 加入用户 PATH（脚本名即命令名；含 lib/ 公共库，必须同目录）
 #    Windows: 设置 → 系统 → 高级系统设置 → 环境变量 → 用户变量 PATH 追加 tools 目录
