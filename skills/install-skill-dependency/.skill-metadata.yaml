@@ -1,0 +1,119 @@
+examples:
+  - id: full-scan-and-install
+    title:
+      zh: 全量扫描并安装依赖
+      en: Full Scan and Install Dependencies
+    description:
+      zh: 扫描所有已安装技能，检测并安装缺失的依赖项
+      en: Scan all installed skills, detect and install missing dependencies
+    prompt:
+      zh: |-
+        请帮我检查所有已安装技能的依赖情况。
+
+        具体要求：
+        1. 检测当前系统环境（操作系统、已安装的工具链）
+        2. 扫描所有已安装的技能，分析它们需要的依赖
+        3. 列出所有缺失或版本不满足的依赖项
+        4. 帮我逐个安装缺失的依赖
+
+        请在安装前告诉我每个依赖的作用和安装命令，等我确认后再执行。
+      en: |-
+        Please help me check the dependency status of all installed skills.
+
+        Requirements:
+        1. Detect the current system environment (OS, installed toolchains)
+        2. Scan all installed skills and analyze their required dependencies
+        3. List all missing or version-unsatisfied dependencies
+        4. Help me install missing dependencies one by one
+
+        Please explain each dependency's purpose and install command before executing, and wait for my confirmation.
+  - id: fix-specific-skill
+    title:
+      zh: 修复特定技能的依赖
+      en: Fix Dependencies for a Specific Skill
+    description:
+      zh: 针对某个运行失败的技能，诊断并修复其依赖问题
+      en: Diagnose and fix dependency issues for a specific skill that failed to run
+    prompt:
+      zh: |-
+        我在使用 {{技能名称}} 技能时遇到了错误，提示找不到依赖或二进制文件。
+
+        错误信息：
+        {{粘贴错误信息}}
+
+        请帮我：
+        1. 分析这个错误的原因
+        2. 检查该技能需要哪些依赖
+        3. 确认我的系统上缺少了什么
+        4. 帮我安装缺失的依赖来修复这个问题
+      en: |-
+        I encountered an error when using the {{skill name}} skill, saying a dependency or binary was not found.
+
+        Error message:
+        {{paste error message}}
+
+        Please help me:
+        1. Analyze the cause of this error
+        2. Check what dependencies this skill requires
+        3. Confirm what is missing on my system
+        4. Help me install the missing dependencies to fix this issue
+  - id: environment-check
+    title:
+      zh: 环境健康检查
+      en: Environment Health Check
+    description:
+      zh: 全面检测系统环境和工具链，生成环境报告
+      en: Comprehensive system environment and toolchain detection, generate environment report
+    prompt:
+      zh: |-
+        请帮我做一次完整的环境健康检查。
+
+        我想了解：
+        1. 当前操作系统信息
+        2. 已安装的包管理器及版本（brew/apt/npm/pip 等）
+        3. 已安装的运行时环境及版本（Node.js/Python/Ruby/Java 等）
+        4. 常用工具的安装情况（git/curl/ffmpeg/pandoc 等）
+        5. 当前已安装了哪些技能
+        6. 各技能的依赖满足情况概览
+
+        请以清晰的表格形式展示结果。
+      en: |-
+        Please help me do a comprehensive environment health check.
+
+        I want to know:
+        1. Current operating system information
+        2. Installed package managers and versions (brew/apt/npm/pip, etc.)
+        3. Installed runtime environments and versions (Node.js/Python/Ruby/Java, etc.)
+        4. Installation status of common tools (git/curl/ffmpeg/pandoc, etc.)
+        5. What skills are currently installed
+        6. Overview of dependency satisfaction for each skill
+
+        Please present the results in a clear table format.
+  - id: mirror-optimization
+    title:
+      zh: 配置国内镜像源
+      en: Configure Regional Mirrors
+    description:
+      zh: 为 npm/pip/brew 等工具配置国内镜像源以加速下载
+      en: Configure regional mirrors for npm/pip/brew to speed up downloads
+    prompt:
+      zh: |-
+        我在国内网络环境下，下载依赖速度很慢。
+
+        请帮我：
+        1. 检查当前 npm/pip/brew 等工具的源配置
+        2. 推荐适合国内的镜像源（如淘宝镜像、清华源、中科大源等）
+        3. 帮我配置镜像源以加速后续的依赖安装
+        4. 确认配置生效
+
+        请在修改任何全局配置前先告知我，等我确认后再执行。
+      en: |-
+        I'm in a network environment where downloading dependencies is slow.
+
+        Please help me:
+        1. Check current source configuration for npm/pip/brew and other tools
+        2. Recommend suitable regional mirrors
+        3. Help me configure mirrors to speed up subsequent dependency installations
+        4. Confirm the configuration is effective
+
+        Please inform me before modifying any global configuration and wait for my confirmation.

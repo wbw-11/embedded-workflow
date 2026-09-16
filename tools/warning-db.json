@@ -1,0 +1,341 @@
+﻿[
+    {
+        "id": "c51-c202",
+        "platform": "c51",
+        "type": "error",
+        "code": "C202",
+        "message": "未定义标识符",
+        "pattern": "error C202",
+        "causes": [
+            "标识符拼写错误",
+            "头文件未包含",
+            "变量作用域错误（在函数外定义，函数内引用）",
+            "宏定义缺失"
+        ],
+        "solutions": [
+            "检查标识符拼写是否正确",
+            "确认包含了声明该标识符的头文件",
+            "检查变量是否在正确的作用域内",
+            "用 Grep 搜索头文件中是否有该标识符声明"
+        ],
+        "severity": "critical"
+    },
+    {
+        "id": "c51-c206",
+        "platform": "c51",
+        "type": "error",
+        "code": "C206",
+        "message": "缺少分号",
+        "pattern": "error C206",
+        "causes": [
+            "语句末尾遗漏分号",
+            "上一行代码语法错误导致编译器无法识别",
+            "宏定义展开后缺少分号",
+            "结构体/枚举定义末尾遗漏分号"
+        ],
+        "solutions": [
+            "检查报错行及上一行是否缺少分号",
+            "检查结构体、枚举、联合体定义末尾是否有分号",
+            "检查宏定义是否完整",
+            "检查括号是否配对"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "c51-c129",
+        "platform": "c51",
+        "type": "error",
+        "code": "C129",
+        "message": "缺少分号/语法错误",
+        "pattern": "error C129",
+        "causes": [
+            "语法错误，编译器无法解析",
+            "缺少分号或其他标点符号",
+            "关键字拼写错误",
+            "类型名未定义"
+        ],
+        "solutions": [
+            "仔细检查报错行附近的语法",
+            "确认所有关键字拼写正确",
+            "检查是否缺少必要的头文件",
+            "检查括号、花括号是否配对"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "c51-l107",
+        "platform": "c51",
+        "type": "error",
+        "code": "L107",
+        "message": "地址溢出（RAM 不足）",
+        "pattern": "ERROR L107",
+        "causes": [
+            "全局变量和静态变量占用 RAM 过多",
+            "堆栈空间设置过大",
+            "数组定义过大",
+            "使用了太多的 xdata/data/idata 变量"
+        ],
+        "solutions": [
+            "减少全局变量和静态变量的使用",
+            "将大数组移到 code 区（常量数据）或 xdata 区",
+            "优化算法，减少临时变量",
+            "使用更小的数据类型（如 uint8_t 代替 int）",
+            "调整堆栈大小设置"
+        ],
+        "severity": "critical"
+    },
+    {
+        "id": "c51-l121",
+        "platform": "c51",
+        "type": "error",
+        "code": "L121",
+        "message": "重复定义",
+        "pattern": "ERROR L121",
+        "causes": [
+            "全局变量在头文件中定义（未加 extern）",
+            "函数名重复定义",
+            "多个 .c 文件中定义了同名全局变量",
+            "宏定义与变量名冲突"
+        ],
+        "solutions": [
+            "将头文件中的全局变量改为 extern 声明",
+            "检查是否有同名函数或变量",
+            "使用 static 限制变量作用域",
+            "使用命名前缀避免命名冲突"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "armcc-#20",
+        "platform": "armcc",
+        "type": "error",
+        "code": "#20",
+        "message": "标识符未声明",
+        "pattern": "#20-D",
+        "causes": [
+            "标识符拼写错误",
+            "头文件未包含",
+            "变量作用域错误",
+            "C++ 与 C 链接约定不匹配"
+        ],
+        "solutions": [
+            "检查标识符拼写是否正确",
+            "确认包含了声明该标识符的头文件",
+            "检查变量是否在正确的作用域内",
+            "C++ 中使用 extern \"C\" 包裹 C 头文件"
+        ],
+        "severity": "critical"
+    },
+    {
+        "id": "armcc-#5",
+        "platform": "armcc",
+        "type": "error",
+        "code": "#5",
+        "message": "无法打开源文件",
+        "pattern": "#5-D.*cannot open source input file",
+        "causes": [
+            "头文件路径配置错误",
+            "头文件不存在或被删除",
+            "文件名大小写错误（Linux 系统）",
+            "Include 路径未正确添加"
+        ],
+        "solutions": [
+            "检查头文件是否存在于指定路径",
+            "在 Keil 选项中添加正确的 Include 路径",
+            "检查文件名大小写是否一致",
+            "检查 #include 拼写是否正确"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "armcc-#177",
+        "platform": "armcc",
+        "type": "warning",
+        "code": "#177",
+        "message": "变量声明但未引用",
+        "pattern": "#177-D",
+        "causes": [
+            "定义了变量但从未使用",
+            "调试代码残留",
+            "条件编译中某些分支未使用变量",
+            "变量名拼写错误导致实际使用的是另一个变量"
+        ],
+        "solutions": [
+            "删除未使用的变量",
+            "检查是否有变量名拼写错误",
+            "使用 __attribute__((unused)) 标记有意不使用的变量",
+            "在调试代码中添加条件编译"
+        ],
+        "severity": "low"
+    },
+    {
+        "id": "armcc-#188",
+        "platform": "armcc",
+        "type": "warning",
+        "code": "#188",
+        "message": "枚举类型与其他类型混合",
+        "pattern": "#188-D",
+        "causes": [
+            "将整数赋值给枚举变量",
+            "函数返回枚举类型但实际返回整数",
+            "不同枚举类型之间相互赋值",
+            "枚举值作为整数参与运算"
+        ],
+        "solutions": [
+            "使用正确的枚举值而非整数",
+            "必要时进行强制类型转换",
+            "检查函数返回类型是否正确",
+            "考虑用 #define 或 const 代替枚举（如果需要整数运算）"
+        ],
+        "severity": "medium"
+    },
+    {
+        "id": "armcc-l6406",
+        "platform": "armcc",
+        "type": "error",
+        "code": "L6406",
+        "message": "链接范围溢出（Flash/RAM 不足）",
+        "pattern": "Error: L6406E",
+        "causes": [
+            "代码量太大，Flash 空间不足",
+            "全局变量和静态变量占用 RAM 过多",
+            "堆栈设置过大",
+            "使用了过多的库函数"
+        ],
+        "solutions": [
+            "优化代码，减少代码体积",
+            "开启编译器优化选项（-O1/-O2/-Os）",
+            "减少全局变量使用，改用局部变量",
+            "调整分散加载文件（sct）中的内存分配",
+            "使用更小的数据类型"
+        ],
+        "severity": "critical"
+    },
+    {
+        "id": "gcc-undef-ref",
+        "platform": "gcc",
+        "type": "error",
+        "code": "undefined reference",
+        "message": "未定义引用",
+        "pattern": "undefined reference to",
+        "causes": [
+            "函数/变量只声明未定义",
+            "源文件未加入编译",
+            "库文件未链接",
+            "C++ 与 C 链接约定不匹配（name mangling）"
+        ],
+        "solutions": [
+            "检查函数/变量是否有对应的定义实现",
+            "确认包含该函数的源文件已加入编译列表",
+            "在 CMakeLists.txt 或 Makefile 中添加必要的库",
+            "C++ 中使用 extern \"C\" 包裹 C 头文件声明"
+        ],
+        "severity": "critical"
+    },
+    {
+        "id": "gcc-conflict-types",
+        "platform": "gcc",
+        "type": "error",
+        "code": "conflicting types",
+        "message": "类型冲突",
+        "pattern": "conflicting types for",
+        "causes": [
+            "函数声明与定义的参数或返回值类型不一致",
+            "头文件中声明与实现中定义不匹配",
+            "隐式函数声明与实际定义冲突",
+            "typedef 重定义"
+        ],
+        "solutions": [
+            "确保函数声明和定义的参数类型、返回值类型完全一致",
+            "检查头文件和源文件中的函数签名",
+            "确保所有函数在使用前都有正确的声明",
+            "检查是否有重复的 typedef 定义"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "gcc-expected-semicolon",
+        "platform": "gcc",
+        "type": "error",
+        "code": "expected ';' before",
+        "message": "缺少分号",
+        "pattern": "expected ';' before",
+        "causes": [
+            "语句末尾遗漏分号",
+            "上一行代码语法错误",
+            "结构体/枚举定义末尾遗漏分号",
+            "宏定义不完整"
+        ],
+        "solutions": [
+            "检查报错位置之前的语句是否缺少分号",
+            "检查结构体、枚举、联合体定义末尾是否有分号",
+            "检查宏定义是否正确闭合",
+            "检查括号、花括号是否配对"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "gcc-no-rule",
+        "platform": "gcc",
+        "type": "error",
+        "code": "No rule to make target",
+        "message": "Make 规则缺失",
+        "pattern": "No rule to make target",
+        "causes": [
+            "源文件被删除或重命名但 Makefile/CMake 未更新",
+            "文件路径错误",
+            "CMakeLists.txt 中添加了不存在的源文件",
+            "组件依赖配置错误"
+        ],
+        "solutions": [
+            "检查报错的文件是否存在",
+            "更新 CMakeLists.txt 或 Makefile 中的源文件列表",
+            "检查文件名和路径拼写是否正确",
+            "执行 idf.py fullclean 清理后重新编译",
+            "检查组件依赖是否正确配置"
+        ],
+        "severity": "high"
+    },
+    {
+        "id": "gcc-implicit-decl",
+        "platform": "gcc",
+        "type": "warning",
+        "code": "implicit declaration of function",
+        "message": "函数隐式声明",
+        "pattern": "implicit declaration of function",
+        "causes": [
+            "使用函数前未包含对应头文件",
+            "函数名拼写错误",
+            "头文件中缺少函数声明",
+            "使用了 C99 之后才引入的函数但未定义相应宏"
+        ],
+        "solutions": [
+            "添加包含该函数声明的头文件",
+            "检查函数名拼写是否正确",
+            "确认头文件中是否有该函数的声明",
+            "在包含头文件前定义相应的功能测试宏（如 _GNU_SOURCE）"
+        ],
+        "severity": "medium"
+    },
+    {
+        "id": "linker-multiple-def",
+        "platform": "linker",
+        "type": "error",
+        "code": "multiple definition",
+        "message": "多重定义",
+        "pattern": "multiple definition of",
+        "causes": [
+            "头文件中定义了全局变量（未加 extern）",
+            "多个源文件中定义了同名全局变量",
+            "函数在多个文件中重复实现",
+            "模板或内联函数实例化冲突"
+        ],
+        "solutions": [
+            "将头文件中的变量定义改为 extern 声明",
+            "使用 static 限制全局变量作用域",
+            "检查是否有重复的函数实现",
+            "使用命名空间或前缀避免命名冲突"
+        ],
+        "severity": "high"
+    }
+]

@@ -1,0 +1,4 @@
+model: PP-OCRv5-server
+device: NPU
+lang: ch
+batch_size: 1

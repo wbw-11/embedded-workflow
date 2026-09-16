@@ -1,0 +1,16 @@
+{
+    "venv_name": "t2i-tts",
+    "python_version": "3.11",
+    "mem_need_gb": 8.5,
+    "server_alive_timeout": 300,
+    "models": [
+        {
+            "model_id": "snake7gun/FLUX.2-klein-4B-int4-ov",
+            "dir_name": "FLUX.2-klein-4B-int4-ov",
+            "required_files": [
+                "model_index.json",
+                "vae_bn_stats.npz"
+            ]
+        }
+    ]
+}

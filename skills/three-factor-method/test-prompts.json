@@ -1,0 +1,52 @@
+{
+  "skill": "three-factor-method",
+  "version": "0.1.0",
+  "source_book": "《电路》邱关源第五版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "RC 充电电路，电容电压随时间怎么变？多久充满？",
+      "expected_behavior": "激活 three-factor-method, 用三要素(初值/稳态/τ)",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "求一阶电路的时间常数",
+      "expected_behavior": "激活 three-factor-method, 戴维南化求 R 后算 τ",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "开关断开后 RL 电路的电流衰减",
+      "expected_behavior": "激活 three-factor-method, 三要素直接写全响应",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "二阶 RLC 电路的欠阻尼振荡响应",
+      "expected_behavior": "three-factor-method 不应激活; 二阶以上走 laplace-method",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "换路后的初始值是多少",
+      "expected_behavior": "three-factor-method 不应作为首选; 应走 initial-conditions",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "两个电容并联的电路能用三要素吗？",
+      "expected_behavior": "边缘: 可合并等效为一阶, 提示先判阶",
+      "notes": "边界场景"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "3 should_trigger + 2 should_not_trigger(含跨skill诱饵) + 1 edge_case"
+}

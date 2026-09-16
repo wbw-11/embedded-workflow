@@ -1,0 +1,52 @@
+{
+  "skill": "c-algorithms",
+  "version": "0.1.0",
+  "source_book": "《C程序设计语言》K&R 第2版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "在 C 里怎么实现折半查找？边界怎么处理？",
+      "expected_behavior": "激活 c-algorithms, 给出三路判定与 -1 哨兵写法",
+      "notes": "正面场景: 折半查找"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "静态关键字表怎么用 sizeof 安全求长度？",
+      "expected_behavior": "激活 c-algorithms, sizeof tab/sizeof tab[0] 编译期求表长",
+      "notes": "正面场景: sizeof 表长"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "想用一个排序函数按名字或按分数排序，怎么改？",
+      "expected_behavior": "激活 c-algorithms, 用函数指针注入比较逻辑",
+      "notes": "正面场景: 参数化比较"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "树的遍历用递归还是迭代更合适？",
+      "expected_behavior": "c-algorithms 不应激活; 应触发 recursion-modeling (递归取舍)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "C 里怎么组织关键字和计数成一对结构体？",
+      "expected_behavior": "c-algorithms 不应激活; 应触发 data-organization (struct 数组)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "快排递归太深会栈溢出吗？",
+      "expected_behavior": "边缘: 未定义深度需评估; 提到 qsort 最坏 O(n) 栈, 转 recursion-modeling 讨论",
+      "notes": "边界场景: 快排栈深度"
+    }
+  ],
+  "minimum_pass_rate": 0.85,
+  "notes": "3 should_trigger + 2 should_not_trigger(跨skill诱饵) + 1 edge_case"
+}

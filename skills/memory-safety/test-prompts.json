@@ -1,0 +1,52 @@
+{
+  "skill": "memory-safety",
+  "version": "0.1.0",
+  "source_book": "《C程序设计语言》K&R 第2版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "遍历整条链表然后逐个 free，为什么程序崩了？",
+      "expected_behavior": "激活 memory-safety, 指出 free 后用 next, 先存 next 再释放",
+      "notes": "正面场景: 链表释放"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "strcat 拼接字符串会不会溢出？怎么保证安全？",
+      "expected_behavior": "激活 memory-safety, 调用方保证目标足够大/用限长函数",
+      "notes": "正面场景: 缓冲区溢出"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "malloc 的返回值需要检查吗？忘检查有什么后果？",
+      "expected_behavior": "激活 memory-safety, 分配失败返回 NULL 需处理",
+      "notes": "正面场景: malloc 失败处理"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "为什么 free 之后再读数据会得到垃圾值？是求值顺序问题吗？",
+      "expected_behavior": "memory-safety 可激活但由于疑似求值顺序应引导分诊: 优先 memory-safety 判定 use-after-free; 若侧重顺序才转 undefined-behavior",
+      "notes": "跨 skill 边界: free 后用是 UB 子集, memory-safety 为主"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "嵌入式无 OS 怎么自己实现内存分配？",
+      "expected_behavior": "memory-safety 不应激活; 应触发 allocator-pattern (自建分配器)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "栈上的数组反复调用会不会内存泄漏？",
+      "expected_behavior": "边缘: 栈数组不涉及 malloc/free, 无堆泄漏; 需区分栈与堆",
+      "notes": "边界场景: 栈vs堆"
+    }
+  ],
+  "minimum_pass_rate": 0.85,
+  "notes": "3 should_trigger + 2 should_not_trigger(含边界导航) + 1 edge_case"
+}

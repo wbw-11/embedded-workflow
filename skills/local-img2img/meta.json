@@ -1,0 +1,19 @@
+{
+  "author": "Github",
+  "author_icon": "https://static.marvis.qq.com/wupload/skill-author-icons/1778639349473_GitHub.png",
+  "description": "|",
+  "detail_describe": "根据输入图片和文字提示在本地修改图片\n首次自动下载FLUX.2-klein量化模型并构建运行环境\n保持服务进程常驻以支持快速重复编辑",
+  "display_description": "基于本地AI大模型的图片修改与图生图(仅限英特尔AIPC平台)",
+  "display_name": "本地图生图",
+  "name": "local-img2img",
+  "scope": [
+    "main"
+  ],
+  "type": "英特尔用户专区",
+  "use_cases": [
+    "把这张狗狗照片里的狗改成戴草帽的小猫。",
+    "修改这张人像照片，把背景换成阳光海滩。",
+    "把这张图片改成温暖的水彩插画风格。"
+  ],
+  "version": "1.0.3"
+}

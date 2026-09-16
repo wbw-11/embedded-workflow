@@ -1,0 +1,52 @@
+{
+  "skill": "superposition",
+  "version": "0.1.0",
+  "source_book": "《电路》邱关源第五版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "电路里有两个电压源一个电流源，求某处电流怎么算？",
+      "expected_behavior": "激活 superposition, 各源单独作用再叠加",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "这个多源电路的功率能不能先分电源算再相加？",
+      "expected_behavior": "激活 superposition, 澄清功率不叠加",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "用叠加定理求电路中的电压",
+      "expected_behavior": "激活 superposition, 分解求响应再代数叠加",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "一端口很多元件，我想整体简化成电压源加电阻",
+      "expected_behavior": "superposition 不应激活; 应走 thevenin-norton",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "帮我列结点电压方程解这个电路",
+      "expected_behavior": "superposition 不应激活; 应走 method-selection",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "二极管电路能叠加吗？",
+      "expected_behavior": "边缘: 非线性, 叠加不适用, 提示不能用",
+      "notes": "边界场景"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "3 should_trigger + 2 should_not_trigger(含跨skill诱饵) + 1 edge_case"
+}

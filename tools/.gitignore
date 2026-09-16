@@ -1,0 +1,9 @@
+# 备份与临时
+*.bak
+*.log
+bom_fix_backup_*/
+.self-update-state.json
+verify-code-style/.last_verified
+# 系统
+Thumbs.db
+.DS_Store

@@ -1,0 +1,52 @@
+{
+  "skill": "call-by-value-pointer",
+  "version": "0.1.0",
+  "source_book": "《C程序设计语言》K&R 第2版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我写的 swap(int x, int y) 函数调用后 a、b 没交换，为什么？",
+      "expected_behavior": "激活 call-by-value-pointer, 解释传值拷贝、需传指针",
+      "notes": "正面场景: swap 传值失败"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "C 函数想返回两个值怎么办？（商和余数）",
+      "expected_behavior": "激活 call-by-value-pointer, 用返回值传状态+指针回传数据",
+      "notes": "正面场景: 多输出设计"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "scanf(\"%d\", n) 为什么要在 n 前加 &？",
+      "expected_behavior": "激活 call-by-value-pointer, 说明 scanf 需指针写回",
+      "notes": "正面场景: scanf 传址"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "#define square(x) x*x 传入 z+1 结果不对怎么办？",
+      "expected_behavior": "call-by-value-pointer 不应激活; 应触发 macro-vs-function (宏副作用)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "a[i] 和 *(a+i) 到底差在哪？怎么换算？",
+      "expected_behavior": "call-by-value-pointer 不应激活; 应触发 pointer-array (下标↔指针换算)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "结构体很大，函数只想读不想改，传值还是传指针？",
+      "expected_behavior": "边缘: 传指针避免拷贝开销, 但语义是只读; 提示正确性与性能取舍",
+      "notes": "边界场景: 只读大对象"
+    }
+  ],
+  "minimum_pass_rate": 0.85,
+  "notes": "3 should_trigger + 2 should_not_trigger(跨skill诱饵) + 1 edge_case"
+}

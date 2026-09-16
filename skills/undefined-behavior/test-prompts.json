@@ -1,0 +1,52 @@
+{
+  "skill": "undefined-behavior",
+  "version": "0.1.0",
+  "source_book": "《C程序设计语言》K&R 第2版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "x = f() + g() 里 f 和 g 谁先执行？结果会不会变？",
+      "expected_behavior": "激活 undefined-behavior, 说明求值顺序未指定需拆分",
+      "notes": "正面场景: 求值顺序"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "a[i] = i++ 这种写法对吗？i 用的是旧值还是新值？",
+      "expected_behavior": "激活 undefined-behavior, 判定为未定义行为并给改写",
+      "notes": "正面场景: 副作用未定义"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "printf(\"%d %d\", ++n, power(2,n)) 换编译器结果不一样，正常吗？",
+      "expected_behavior": "激活 undefined-behavior, 函数实参求值顺序未定义, 拆语句",
+      "notes": "正面场景: 实参顺序陷阱"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "x & MASK == 0 这个表达式需要加括号吗？",
+      "expected_behavior": "undefined-behavior 不应激活; 应触发 operator-precedence (优先级问题非求值顺序)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "遍历释放链表怎么防崩溃？（free 后报错）",
+      "expected_behavior": "undefined-behavior 不应激活; 应触发 memory-safety (先存 next 再 free)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "越界访问数组却还没崩，是安全了吗？",
+      "expected_behavior": "边缘: 未定义行为未崩不代表安全, 编译器可任意处理, 必须修正",
+      "notes": "边界场景: 未崩不等于正确"
+    }
+  ],
+  "minimum_pass_rate": 0.85,
+  "notes": "3 should_trigger + 2 should_not_trigger(跨skill诱饵) + 1 edge_case"
+}

@@ -1,0 +1,19 @@
+{
+  "author": "Intel",
+  "description": "Extracts text from images using local OCR running on Intel NPU.",
+  "detail_describe": "从图片中识别文字（中英文混合）\n使用 Intel NPU 本地推理，无需联网\n支持单张图片或整个目录批量识别\n基于 PP-OCRv5-server 高精度模型",
+  "display_description": "使用本地 Intel NPU 算力，从图片中高速提取文字（支持中英文混合）",
+  "display_name": "本地NPU OCR文字识别",
+  "name": "local-ocr-npu",
+  "scope": [
+    "main"
+  ],
+  "type": "英特尔用户专区",
+  "use_cases": [
+    "识别这张图片里的文字",
+    "提取截图中的文字内容",
+    "OCR识别发票上的文字",
+    "读取图片里的中英文"
+  ],
+  "version": "1.0.0"
+}

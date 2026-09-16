@@ -1,0 +1,52 @@
+{
+  "skill": "complex-power",
+  "version": "0.1.0",
+  "source_book": "《电路》邱关源第五版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "这个电机负载的功率因数是 0.6，怎么提高到接近 1？",
+      "expected_behavior": "激活 complex-power, 并电容无功补偿",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "求电路的 P、Q、S 和功率因数",
+      "expected_behavior": "激活 complex-power, 用 S=UI* 分解",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "无功功率是什么？有什么用？怎么算？",
+      "expected_behavior": "激活 complex-power, 讲清 Q 的物理与计算方法",
+      "notes": "正面场景"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "求这个交流电路的电感和电容上的电压相量",
+      "expected_behavior": "complex-power 不应作为首选; 应走 phasor-method",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "负载多大能获得最大功率",
+      "expected_behavior": "complex-power 不应激活; 应走 max-power-transfer",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "变压器额定容量 100kVA 是耗电 100kW 吗？",
+      "expected_behavior": "边缘: 澄清 S vs P, 视在功率不是实际耗能",
+      "notes": "边界场景"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "3 should_trigger + 2 should_not_trigger(含跨skill诱饵) + 1 edge_case"
+}

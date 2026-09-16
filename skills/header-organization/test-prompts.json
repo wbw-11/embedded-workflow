@@ -1,0 +1,52 @@
+{
+  "skill": "header-organization",
+  "version": "0.1.0",
+  "source_book": "《C程序设计语言》K&R 第2版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "多文件工程报 duplicate definition，怎么解决？",
+      "expected_behavior": "激活 header-organization, 单一定义+头文件放声明",
+      "notes": "正面场景: 重复定义"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "几个源文件要共享一个 counter 变量，extern 怎么用？",
+      "expected_behavior": "激活 header-organization, 定义加 extern 声明放头文件",
+      "notes": "正面场景: extern 共享"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "怎么把模块内部的函数隐藏，不让外部调用？",
+      "expected_behavior": "激活 header-organization, 用 static 限制文件内链接",
+      "notes": "正面场景: static 隐藏"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "一个 500 行的大函数该怎么拆？",
+      "expected_behavior": "header-organization 不应激活; 应触发 function-decomposition (函数拆分)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "函数返回 double 但没声明，跨文件调用得到垃圾值为什么？",
+      "expected_behavior": "header-organization 不应激活; 应触发 function-prototype (隐式声明)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "static 修饰局部变量和修饰全局变量含义一样吗？",
+      "expected_behavior": "边缘: static 双重语义(文件链接 vs 函数内静态生存期), 简答并指向 GLOSSARY",
+      "notes": "边界场景: static 双重语义"
+    }
+  ],
+  "minimum_pass_rate": 0.85,
+  "notes": "3 should_trigger + 2 should_not_trigger(跨skill诱饵) + 1 edge_case"
+}

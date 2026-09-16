@@ -1,0 +1,52 @@
+{
+  "skill": "data-organization",
+  "version": "0.1.0",
+  "source_book": "《C程序设计语言》K&R 第2版",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "struct 大小为什么比成员加起来还大？",
+      "expected_behavior": "激活 data-organization, 解释对齐空穴, 用 sizeof",
+      "notes": "正面场景: 对齐空穴"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "硬件寄存器里有几个标志位，怎么用 C 结构表示最省？",
+      "expected_behavior": "激活 data-organization, 用位字段 unsigned f:1",
+      "notes": "正面场景: 位字段"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "struct 和 union 到底什么时候用哪个？",
+      "expected_behavior": "激活 data-organization, 按并存/互斥选择, 讲清偏移0共享存储",
+      "notes": "正面场景: struct vs union 选型"
+    },
+    {
+      "id": "should-not-trigger-04",
+      "type": "should_not_trigger",
+      "prompt": "链表遍历怎么用标准惯用法写？",
+      "expected_behavior": "data-organization 不应激活; 应触发 linked-list-pattern (链表实现)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "should-not-trigger-05",
+      "type": "should_not_trigger",
+      "prompt": "字符串 s 传进函数当参数，和指针有什么区别？",
+      "expected_behavior": "data-organization 不应激活; 应触发 pointer-array (数组形参退化)",
+      "notes": "跨 skill 混淆诱饵"
+    },
+    {
+      "id": "edge-06",
+      "type": "edge_case",
+      "prompt": "typedef 算不算定义了一种新类型？",
+      "expected_behavior": "边缘: typedef 只是别名非新类型, 与原名完全等价",
+      "notes": "边界场景: typedef 别名语义"
+    }
+  ],
+  "minimum_pass_rate": 0.85,
+  "notes": "3 should_trigger + 2 should_not_trigger(跨skill诱饵) + 1 edge_case"
+}

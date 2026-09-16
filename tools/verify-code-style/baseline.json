@@ -1,0 +1,41 @@
+{
+  "_description": "code-style-check.ps1 检出基线 — 每次改脚本后必须跑 3 个文件，结果与此基线对比",
+  "_updated": "2026-08-12",
+  "_usage": "改脚本 → 跑 clean_code.c(必须0告警) → 跑 test_q10.c + test_q45 → 对比此基线 → 完全匹配才部署",
+
+  "clean_code.c": {
+    "_role": "反误报基线（全好例，0 告警）",
+    "expected_exit_code": 0,
+    "expected_total_alerts": 0,
+    "note": "有任何告警说明脚本产生了 FP，必须修复后才能部署"
+  },
+
+  "test_q10.c": {
+    "_role": "ARM 项目坏例（检出基线）",
+    "expected_exit_code": 3,
+    "expected_total_alerts": 9,
+    "breakdown": {
+      "Q1_struct_static_assert": { "count": 3, "lines": [15, 30, 60], "severity": "P0" },
+      "Q2_init_order":           { "count": 1, "lines": [104],         "severity": "P1" },
+      "Q3_macro_parens":         { "count": 3, "lines": [35, 38, 41],  "severity": "P1" },
+      "Q6_isr_feed_watchdog":    { "count": 1, "lines": [59],          "severity": "P1" },
+      "Q7_nvic_priority_group":  { "count": 1, "lines": [63],          "severity": "P1" }
+    }
+  },
+
+  "test_q45_8051_stubs.c": {
+    "_role": "8051 项目坏例（检出基线）",
+    "expected_exit_code": 1,
+    "expected_total_alerts": 16,
+    "breakdown": {
+      "Q4_8051_sfr_paging":      { "count": 7, "severity": "P1" },
+      "D2_uninitialized_var":    { "count": 9, "severity": "P2" }
+    }
+  },
+
+  "_rules": {
+    "pass_criteria": "clean_code=0告警 AND test_q10=9告警 AND test_q45=16告警",
+    "if_mismatch": "少了=漏检(回归bug) · 多了=误报(FP) · 都必须修复后重新验证",
+    "after_pass": "1.复制脚本到Tools  2.更新本文件  3.记录到project_memory"
+  }
+}
