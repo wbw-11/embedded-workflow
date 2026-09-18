@@ -1,4 +1,4 @@
----
+﻿---
 name: git-workflow
 description: "嵌入式项目 Git 工作流与固件版本：commit 规范/分支策略/版本号/tag/追溯。提交、建分支、打 tag 时调用。"
 version: 1.0.0
@@ -102,7 +102,7 @@ git push origin v1.2.0
 1. `git log v上一个版本..v1.2.0 --oneline` 提取本次版本的全部 commit
 2. 按 type 分类汇总：feat 新功能 / fix 修复 / refactor 重构 / perf 性能 / build 构建
 3. 生成 `CHANGELOG.md`（追加到文件顶部，保留历史版本）
-4. 配合 gh-cli 发布到 GitHub Release：
+4. 配合 GitHub CLI (gh) 发布到 GitHub Release：
 
 ```bash
 gh release create v1.2.0 ./build/firmware.bin --title "v1.2.0" --notes-file CHANGELOG.md
@@ -178,7 +178,7 @@ git diff v1.1.0..v1.2.0 --stat
 git log --all --grep="v1.2.0" --oneline
 ```
 
-## 与 gh-cli 联动
+## 与 GitHub CLI (gh) 联动
 
 ```bash
 # 创建 release（配合 release-notes 技能）

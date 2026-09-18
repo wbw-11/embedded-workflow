@@ -211,9 +211,9 @@ File: test/test_ota_manager.c:112
 | 场景 | 格式 | 工具 |
 |------|------|------|
 | 内部记录/存档 | Markdown (.md) | 直接生成 |
-| 正式交付文档 | Word (.docx) | docx 技能 |
-| 不可编辑的归档 | PDF (.pdf) | pdf 技能 |
-| 数据汇总/对比 | Excel (.xlsx) | xlsx 技能 |
+| 正式交付文档 | Word (.docx) | Word 输出 |
+| 不可编辑的归档 | PDF (.pdf) | PDF 输出 |
+| 数据汇总/对比 | Excel (.xlsx) | Excel 输出 |
 
 ## 与现有技能联动
 

@@ -190,13 +190,13 @@ $toolCategories = [ordered]@{
       Name = "check-skills"
       Primary = $true
       Description = "技能库健康体检（行数/编码/version/代码块/reference 关联）"
-      Skill = "skill-audit"
+      Skill = $null
     }
     [PSCustomObject]@{
       Name = "split-skill"
       Primary = $false
       Description = "技能拆分助手（SKILL.md -> reference.md）"
-      Skill = "skill-audit"
+      Skill = $null
     }
     [PSCustomObject]@{
       Name = "check-bom"

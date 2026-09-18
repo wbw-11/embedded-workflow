@@ -1,1 +1,0 @@
-Write-Host "测试本地NPU OCR服务..."

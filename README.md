@@ -1,4 +1,4 @@
-# Embedded Development Workflow（嵌入式开发工作流）
+﻿# Embedded Development Workflow（嵌入式开发工作流）
 
 > **开源共建** · 把嵌入式开发经验沉淀成可复用、可自动执行的工作流
 
@@ -28,13 +28,13 @@
 
 | 组成部分 | 内容 | 位置 |
 | --- | --- | --- |
-| **Skills 技能库** | 77 个可执行技能（SKILL.md），覆盖开发全流程：流程规则 / 驱动模板 / 芯片规则 / 审查 / 测试 / 调试 / 量产 | [`skills/`](skills/) |
+| **Skills 技能库** | 47 个可执行技能（SKILL.md），覆盖开发全流程：流程规则 / 驱动模板 / 芯片规则 / 审查 / 测试 / 调试 / 量产 | [`skills/`](skills/) |
 | **工具脚本** | 60+ PowerShell + Python 脚本，自动编译烧录、引脚检查、芯片检测、静态审查、版本登记 | [`tools/`](tools/) |
 | **流程规范** | 开发工作流速查手册：按「工作流阶段 × 人机分工」组织，配合技能使用 | [`docs/`](docs/) |
 
 ## 快速浏览（目录）
 
-### Skills（77 个，按阶段分组）
+### Skills（47 个，按阶段分组）
 
 - **流程与规则**：embedded-dev-rules（红线+工作流）、chip-rules（芯片系列规则）、requirement-extraction（需求整理）、writing-plans（计划编写）、software-design-doc（软件设计文档）、code-migration（代码移植）
 - **开发与驱动**：peripheral-driver-template（UART/SPI/I2C/ADC）、ble-nus-template（BLE 透传）、wifi-app-template（WiFi/MQTT）、zephyr-lvgl-guide（Zephyr+LVGL）、freertos-*（FreeRTOS 基础/驱动集成/多核）
@@ -42,7 +42,7 @@
 - **编译与烧录**：esp-idf-build（ESP-IDF 编译烧录）、keil-auto-flash（Keil 自动烧录）、keil-clean、memory-analysis（内存分析）
 - **审查与测试**：embedded-code-review（代码审查清单）、embedded-unit-test（Unity+CMock）、test-driven-development、test-report（测试报告）
 - **调试与诊断**：hardfault-diagnosis（HardFault 定位）、esp32-panic-diagnosis（Panic 解析）、live-debug-workflow（在线调试）、log-analysis（日志分析）、serial-debug（串口调试）、protocol-analysis（协议抓包分析）、wireless-sniffer（无线抓包）
-- **电源与电路**：power-analysis（低功耗）、laplace-method、phasor-method、three-factor-method、thevenin-norton、superposition、opamp-analysis、complex-power
+- **电源与低功耗**：power-analysis（低功耗分析与优化）
 - **工程管理**：git-workflow、mass-production（量产）、rf-verification（射频认证）、knowledge-index（知识索引）、project-cleanup、release-notes
 
 ### Tools（脚本，`tools/` 目录）
@@ -148,7 +148,7 @@ embedded-workflow/
 ├── CONTRIBUTING.md    # 参与贡献指南（一起完善这个流程）
 ├── LICENSE            # MIT
 ├── docs/              # 流程规范文档（公开版）
-├── skills/            # 77 个 Skill 技能库（SKILL.md + rules）
+├── skills/            # 47 个 Skill 技能库（SKILL.md + rules）
 └── tools/             # 工具脚本（ps1 + bat + lib）
 ```
 

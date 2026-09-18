@@ -62,7 +62,7 @@ version: 1.0.0
 （配合 embedded-dev-rules 4.7：写存储前先算寿命账；无存持久化功能可写 N/A）
 ## 三、生成方式
 
-- **Word**：调用 docx 技能把上述骨架落成 .docx
+- **Word**：把上述骨架落成 .docx 文档
 - **飞书云文档**：调用 lark-doc 技能发布，便于团队评审
 - 项目内的草稿允许 Markdown
 
