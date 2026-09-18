@@ -10,8 +10,8 @@
   version: 1.0.0
 #>
 param(
-    [string]$ScriptPath = ".\code-style-check.ps1",
-    [string]$BaselinePath = ".\baseline.json"
+    [string]$ScriptPath = (Join-Path $PSScriptRoot "..\code-style-check.ps1"),
+    [string]$BaselinePath = (Join-Path $PSScriptRoot "baseline.json")
 )
 
 $ErrorActionPreference = "Stop"
@@ -34,10 +34,10 @@ $testFiles = @{
     "test_q10.c"               = $baseline."test_q10.c"
     "test_q45_8051_stubs.c"    = $baseline."test_q45_8051_stubs.c"
 }
-
 foreach ($f in $testFiles.Keys) {
-    if (-not (Test-Path $f)) {
-        Write-Host "[FATAL] 测试文件不存在: $f" -ForegroundColor Red
+    $testPath = Join-Path $PSScriptRoot $f
+    if (-not (Test-Path $testPath)) {
+        Write-Host "[FATAL] 测试文件不存在: $testPath" -ForegroundColor Red
         exit 99
     }
 }
@@ -53,8 +53,10 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
 
 foreach ($file in $testFiles.Keys | Sort-Object) {
+    $fileName = $file
     $expected = $testFiles[$file]
     $expectedAlerts = $expected.expected_total_alerts
+    $file = Join-Path $PSScriptRoot $file
     $expectedExit = $expected.expected_exit_code
 
     # 跑脚本，捕获输出
@@ -77,7 +79,7 @@ foreach ($file in $testFiles.Keys | Sort-Object) {
     $tag = if ($filePass) { "[PASS]" } else { "[FAIL]" }
     $color = if ($filePass) { "Green" } else { "Red" }
 
-    Write-Host "$tag $file" -ForegroundColor $color -NoNewline
+    Write-Host "$tag $fileName" -ForegroundColor $color -NoNewline
     Write-Host "  告警 $actualAlerts/$expectedAlerts  退出码 $actualExit/$expectedExit" -ForegroundColor $color
 
     # 失败时输出详情
