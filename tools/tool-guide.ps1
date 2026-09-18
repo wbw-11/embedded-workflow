@@ -110,6 +110,12 @@ $toolCategories = [ordered]@{
       Description = "擦除 ESP32 Flash"
       Skill = $null
     }
+    [PSCustomObject]@{
+      Name = "prepare-skills"
+      Primary = $false
+      Description = "发布前 skills 白名单核对/同步（防混入）"
+      Skill = $null
+    }
   )
   Debug = @(
     [PSCustomObject]@{

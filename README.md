@@ -55,6 +55,7 @@
 | `code-style-check` | 代码风格静态检查（overflow/defensive 等） |
 | `preflight` | 开工预检（缺包自动引导） |
 | `pin-check` | GPIO 引脚分配与冲突检测 |
+| `prepare-skills` | 发布前 skills 白名单核对/同步（防混入） |
 | `build-all` | 批量编译 |
 | `version-tools` | 脚本版本登记与变更记录 |
 | `esp-idf-env` | ESP-IDF 环境初始化（动态检测路径） |
@@ -130,7 +131,7 @@ powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
 - **零残留**：删掉本文件夹 = 完全卸载
 - 唯一代价：skills 不装进 TRAE 技能目录（需要 TRAE 技能联动时用方式三）
 
-> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `install.ps1 → uninstall.ps1 → run.ps1` 三流程闭环 + `tool-guide / version-tools / check-bom / code-style-check / pin-check` 全部可运行。
+> 部署验证：本仓库每次发布前均在全新目录（模拟他人 clone）实测 `install.ps1 → uninstall.ps1 → run.ps1` 三流程闭环 + `tool-guide / version-tools / check-bom / code-style-check / pin-check / prepare-skills -Check` 全部通过方可发布。
 
 **依赖说明**
 - 基础：Windows + PowerShell 5.1+ + Git

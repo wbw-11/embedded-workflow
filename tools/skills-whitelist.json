@@ -1,0 +1,15 @@
+{
+  "skills": [
+    "ble-nus-template", "board-config", "bring-up-checklist", "chip-rules", "code-migration",
+    "datasheet-lookup", "debug-log-standard", "edge-ai-workflow", "embedded-code-review",
+    "embedded-dev-rules", "embedded-unit-test", "esp-idf-build", "esp32-panic-diagnosis",
+    "freertos-basics", "freertos-driver-integration", "freertos-multicore", "git-workflow",
+    "hardfault-diagnosis", "hardware-detection", "impact-analyze", "keil-auto-flash",
+    "knowledge-index", "live-debug-workflow", "log-analysis", "mass-production", "memory-analysis",
+    "memory-leak-detection", "peripheral-driver-template", "peripheral-test-template", "pin-check",
+    "power-analysis", "project-cleanup", "project-init", "project-stats", "protocol-analysis",
+    "release-notes", "requirement-extraction", "rf-verification", "schematic-reading", "serial-debug",
+    "software-design-doc", "test-driven-development", "test-report", "wifi-app-template",
+    "wireless-sniffer", "writing-plans", "zephyr-lvgl-guide"
+  ]
+}
